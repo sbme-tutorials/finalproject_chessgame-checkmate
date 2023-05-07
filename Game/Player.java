@@ -28,6 +28,12 @@ public class Player {
                     Chess.activePlayer.timerText.setText(Chess.calcTimeString2(Chess.activePlayer.remTime));
                     Chess.frame.repaint();
                 }
+                if(Chess.activePlayer.remTime<=0){
+                    if(Chess.activePlayer.number == 1)
+                    new GameOver(Chess.player2.name);
+                    else
+                    new GameOver(Chess.player1.name);
+                }
             }
         };
         this.timer.schedule(this.task, 1000, 1000);
