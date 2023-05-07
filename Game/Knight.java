@@ -15,18 +15,18 @@ public class Knight extends Piece{
     public void move_piece(){
         if(player.number == 1){
             this.possibleMoves = new int[][]{
-                    {this.x+2 , this.y+3},
-                    {this.x+3 , this.y+2},
-                    {this.x-2 , this.y+3},
-                    {this.x-3 , this.y+2},
+                {this.x+2 , this.y+3},
+                {this.x+3 , this.y+2},
+                {this.x-2 , this.y+3},
+                {this.x-3 , this.y+2},
             };
         }
         else if(player.number == 2){
             this.possibleMoves = new int[][]{
-                    {this.x+2 , this.y-3},
-                    {this.x+3 , this.y-2},
-                    {this.x-2 , this.y-3},
-                    {this.x-3 , this.y-2},
+                {this.x+2 , this.y-3},
+                {this.x+3 , this.y-2},
+                {this.x-2 , this.y-3},
+                {this.x-3 , this.y-2},
             };
         }
         this.moves++;

@@ -52,7 +52,7 @@ public class Rook extends Piece{
         // Check squares in the same row
         for (int i = this.x + 1; i < 8; i++) {
             if(Chess.blocks[this.y][i]!=null){
-                if (Chess.blocks[this.y][i].piece == null) {
+                if (Chess.blocks[this.y][i].piece.value == null) {
                     moves.add(new int[] {i, this.y});
                 } else {
                     if (Chess.blocks[this.y][i].piece.player != player) {
@@ -64,7 +64,7 @@ public class Rook extends Piece{
         }
         for (int i = this.x - 1; i >= 0; i--) {
             if(Chess.blocks[this.y][i]!=null){
-                if (Chess.blocks[this.y][i].piece == null) {
+                if (Chess.blocks[this.y][i].piece.value == null) {
                     moves.add(new int[] {i, this.y});
                 } else {
                     if (Chess.blocks[this.y][i].piece.player != player) {
@@ -100,8 +100,6 @@ public class Rook extends Piece{
                 }
             }
         }
-
         this.possibleMoves = moves.toArray(new int[moves.size()][2]);
-
     }
 }
