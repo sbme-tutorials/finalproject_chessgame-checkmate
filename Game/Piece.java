@@ -9,6 +9,7 @@ public class Piece extends JButton{
     int moves = 0; 
     Player player;
     Block block;
+    boolean hasMoved = true;
     Piece(int x,int y,Player player,String text,Block block){
         this.x = x;
         this.y = y;
@@ -38,7 +39,7 @@ public class Piece extends JButton{
         this.addMouseMotionListener(new Move(this));
     }
 
-    public void move_piece(){}
+    public void move_piece(Boolean UpdateOnly){}
 
     public int[] checkBypass(int x,int y){
         Boolean canByPassX = false;
@@ -65,5 +66,26 @@ public class Piece extends JButton{
         
         //return ((Chess.getBlock(x,y) != null ? Chess.getBlock(x,y).piece.value != null : false && canByPassX == false && canByPassY == false)? new int[]{-1,-1} : new int[]{x,y});
         return ( canByPassX == true && canByPassY == true)? new int[]{x,y} : new int[]{-1,-1};
+    }
+
+    
+    // Check if a square is being attacked by the King
+    public boolean isAttackingSquare(int x, int y) {
+        if (Math.abs(this.x - x) != Math.abs(this.y - y)) {
+            return false; // The Bishop can only attack squares on its diagonals
+        }
+        int dx = (x - this.x > 0) ? 1 : -1; // Determine the direction of movement in the x-axis
+        int dy = (y - this.y > 0) ? 1 : -1; // Determine the direction of movement in the y-axis
+        int i = this.x + dx;
+        int j = this.y + dy;
+        while (i != x && j != y) {
+            if(Chess.blocks[j][i]!=null)
+            if (Chess.blocks[j][i].piece != null) {
+                return false; // The Bishop's path is blocked by another piece
+            }
+            i += dx;
+            j += dy;
+        }
+        return ((Chess.blocks[y][x]!=null ? Chess.blocks[y][x].piece == null : false) || (Chess.blocks[y][x]!=null ? Chess.blocks[y][x].piece.player != this.player : false));
     }
 }

@@ -66,7 +66,7 @@ public class Move implements MouseListener ,MouseMotionListener {
             System.out.println(this.source.x);
             System.out.println(this.source.y);
             //updating the coordinates of the piece
-            this.source.move_piece();
+            this.source.move_piece(false);
             System.out.println(Chess.getBlock(this.source.x,this.source.y).piece.value);
             System.out.println(Chess.getBlock(this.source.x,this.source.y).piece!=this.source);
             System.out.println((Chess.getBlock(this.source.x,this.source.y).piece != null? Chess.getBlock(this.source.x,this.source.y).piece.player != this.source.player : true));

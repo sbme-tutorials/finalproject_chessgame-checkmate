@@ -248,7 +248,7 @@ public class Chess {
             for (int col = 0; col <= 7; col++) {
                 Piece piece = Chess.getBlock(row, col).piece;
                 if (piece.value != null) {
-                    piece.move_piece();
+                    piece.move_piece(true);
                 }
             }
         }     

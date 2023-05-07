@@ -7,12 +7,12 @@ public class Pawn extends Piece{
         //reference to the player owned it
         this.player = player;
         //set the initial possible moves
-        this.move_piece();
+        this.move_piece(true);
     }
 
     //changine the possible moves when piece moves
     @Override
-    public void move_piece(){
+    public void move_piece(Boolean UpdateOnly){
         if(this.player.number == 1){
             if(this.moves == 0){
                 this.possibleMoves = new int[][]{
@@ -47,6 +47,7 @@ public class Pawn extends Piece{
                         };
             }
         }
+        if(!UpdateOnly)
         this.moves++;
     }
 }

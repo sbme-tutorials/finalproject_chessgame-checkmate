@@ -7,14 +7,16 @@ public class Rook extends Piece{
     Rook(int x, int y, Player player,Block block) {
         super(x, y, player, "rook",block);
         //set the initial possible moves
-        this.move_piece();
+        this.move_piece(true);
+        this.hasMoved = false;
         //reference to the player owned it
         this.player = player;
     }
     
     //changine the possible moves when piece moves
     @Override
-    public void move_piece(){
+    public void move_piece(Boolean UpdateOnly){
+        this.hasMoved = false;
         this.possibleMoves = new int[][]{
             {this.x , this.y-7},
             {this.x , this.y-6},
@@ -45,6 +47,7 @@ public class Rook extends Piece{
             {this.x+6 , this.y},
             {this.x+7 , this.y},
         };
+        if(!UpdateOnly)
         this.moves++;
         //check bypass
         List<int[]> moves = new ArrayList<>();
