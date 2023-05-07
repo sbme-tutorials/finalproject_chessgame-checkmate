@@ -36,3 +36,7 @@ The game was created by Checkmate team.
 - Youssef
 - Moustafa Mohammed mousa
 - Karim Elbadawy
+
+## Grantt Chart
+the tasks of the prject are clarified here !
+https://sharing.clickup.com/9009137056/l/h/8cft1d0-300/6ff7353fe7cab00
