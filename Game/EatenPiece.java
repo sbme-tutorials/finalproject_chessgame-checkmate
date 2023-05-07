@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 public class EatenPiece extends JLabel{
     EatenPiece(String type,Player opponent,Player player){
         ImageIcon icon;
-        icon = new ImageIcon("pieces/"+(player.number == 2?"white":"black")+"/"+type+".png"); 
+        icon = new ImageIcon("finalproject_chessgame-checkmate/Game/pieces/"+(player.number == 2?"white":"black")+"/"+type+".png"); 
         Image image = icon.getImage().getScaledInstance(25,25, Image.SCALE_SMOOTH);
         icon = new ImageIcon(image);
         this.setIcon(icon);

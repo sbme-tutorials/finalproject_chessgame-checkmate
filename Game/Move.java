@@ -43,6 +43,7 @@ public class Move implements MouseListener ,MouseMotionListener {
         }
 
         if(canMove){
+            
             //stop the time of the player
             this.source.player.stopTime();
             //run the time for the other player
@@ -58,14 +59,15 @@ public class Move implements MouseListener ,MouseMotionListener {
             Chess.frame.repaint();
             //changing coordinates of the piece
             //Chess.getBlock(this.source.x,this.source.y).piece = null;
+            int oldX = this.source.x;
+            int oldY = this.source.y;
             this.source.x = (e.getXOnScreen() - Chess.blocksize/2)/64;
             this.source.y = (e.getYOnScreen() - Chess.margin/2 - Chess.blocksize/2)/64;
+            System.out.println(this.source.x);
+            System.out.println(this.source.y);
             //updating the coordinates of the piece
             this.source.move_piece();
             System.out.println(Chess.getBlock(this.source.x,this.source.y).piece.value);
-            //System.out.println(this.source.x);
-            //System.out.println(this.source.y);
-            //System.out.println(Chess.getBlock(this.source.x,this.source.y));
             System.out.println(Chess.getBlock(this.source.x,this.source.y).piece!=this.source);
             System.out.println((Chess.getBlock(this.source.x,this.source.y).piece != null? Chess.getBlock(this.source.x,this.source.y).piece.player != this.source.player : true));
             if(Chess.activePiece!=null){
@@ -92,11 +94,10 @@ public class Move implements MouseListener ,MouseMotionListener {
                 //add the refernce to the new block to the piece
                 Chess.getBlock(this.source.x,this.source.y).piece = this.source;
                 //remove the refernce to the piece from old block
-                //if(this.source.block.piece!=null){
-                //this.source.block.piece.value = null;
-                //}
+                Chess.getBlock(oldX,oldY).piece = null;
                 //add the refernce to the piece to the new block
-                this.source.block = Chess.getBlock(this.source.x,this.source.y);        
+                this.source.block = Chess.getBlock(this.source.x,this.source.y); 
+                new Piece(oldX, oldY, null, null, Chess.getBlock(oldX,oldY));
             }
             Chess.movePieces();
         }

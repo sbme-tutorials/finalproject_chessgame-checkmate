@@ -143,8 +143,8 @@ public class Chess {
         label1.setOpaque(true);
         label2.setOpaque(true);
 
-        JLabel name1 = new JLabel(player1.name, JLabel.CENTER);
-        JLabel name2 = new JLabel(player2.name, JLabel.CENTER);
+        JLabel name1 = new JLabel(player1.name);
+        JLabel name2 = new JLabel(player2.name);
         name1.setForeground(new Color(255, 255, 255));
         name2.setForeground(new Color(255, 255, 255));
         name1.setBackground(new Color(49, 46, 43));
