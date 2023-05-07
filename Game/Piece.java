@@ -20,7 +20,7 @@ public class Piece extends JButton{
         if(text!=null){
             //setting the piece icon
             ImageIcon icon;
-            icon = new ImageIcon("pieces/"+(player.number == 2?"white":"black")+"/"+text+".png"); 
+            icon = new ImageIcon("finalproject_chessgame-checkmate/Game/pieces/"+(player.number == 2?"white":"black")+"/"+text+".png"); 
             Image image = icon.getImage().getScaledInstance(Chess.blocksize - 10, Chess.blocksize - 10, Image.SCALE_SMOOTH);
             icon = new ImageIcon(image);
             this.setIcon(icon);
