@@ -30,8 +30,9 @@ Additional customization options can be added by modifying the source code.
 
 ## Credits
 
-The game was created by [insert your name here].
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+The game was created by Checkmate team.
+- Mahmoud Bahaa
+- Yassin Tawfiq
+- Youssef
+- Moustafa Mohammed mousa
+- Karim Elbadawy
