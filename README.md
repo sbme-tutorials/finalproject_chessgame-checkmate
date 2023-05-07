@@ -31,11 +31,11 @@ Additional customization options can be added by modifying the source code.
 ## Credits
 
 The game was created by Checkmate team.
-- Mahmoud Bahaa
-- Yassin Tawfiq
-- Youssef
+- Mahmoud Bahaa AlDeen
+- Yassin Mohammed Moustafa
+- Youssef Mohammed Fathy
 - Moustafa Mohammed mousa
-- Karim Elbadawy
+- Karim Ebrahim Elbadawy
 
 ## Grantt Chart
 the tasks of the prject are clarified here !
