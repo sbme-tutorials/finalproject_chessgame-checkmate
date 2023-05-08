@@ -63,13 +63,9 @@ public class Move implements MouseListener ,MouseMotionListener {
             int oldY = this.source.y;
             this.source.x = (e.getXOnScreen() - Chess.blocksize/2)/64;
             this.source.y = (e.getYOnScreen() - Chess.margin/2 - Chess.blocksize/2)/64;
-            System.out.println(this.source.x);
-            System.out.println(this.source.y);
             //updating the coordinates of the piece
             this.source.move_piece(false);
-            System.out.println(Chess.getBlock(this.source.x,this.source.y).piece.value);
-            System.out.println(Chess.getBlock(this.source.x,this.source.y).piece!=this.source);
-            System.out.println((Chess.getBlock(this.source.x,this.source.y).piece != null? Chess.getBlock(this.source.x,this.source.y).piece.player != this.source.player : true));
+            
             if(Chess.activePiece!=null){
                 //eat pieces condtion (check if there a piece in that position and the piece is not for the same player)
                 if(Chess.getBlock(this.source.x,this.source.y).piece.value != null && 

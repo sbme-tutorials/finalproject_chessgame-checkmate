@@ -19,93 +19,70 @@ public class Chess {
 
     // drawing the table constructor
     Chess(int frameSizeP, String player1Name, String player2Name, double playTime) {
+
         time = playTime;
         frameSize = frameSizeP;
         blocksize = (Chess.frameSize - 10) / 8;
         frame = new Frame(frameSize, "chess Game");
 
-        // initialize the two players with its name
-        Player player1 = new Player(player1Name, Chess.time);
-        Player player2 = new Player(player2Name, Chess.time);
-
-        Chess.player1 = player1;
-        Chess.player2 = player2;
+        // initialize the two players with its name   
+        player1 = new Player(player1Name, Chess.time);
+        player2 = new Player(player2Name, Chess.time);
 
         // drawing the filled pieces that have not null pieces
+        //looping over rows
         for (int row = 0; row <= 7; row++) {
             // condition to be in the rows 1,2,7,8
             if (row < 2 || row > 5) {
                 // give the refernce to the player which will owe the piece
-                Player player;
-                if (row < 2)
-                    player = player1;
-                else if (row > 5)
-                    player = player2;
-                else
-                    player = null;
-
+                Player player = row < 2 ? player1 : (row > 5 ? player2 : null);
+                //looping over columns
                 for (int col = 0; col <= 7; col++) {
-                    Color color;
-                    if ((col + row) % 2 == 1)
-                        color = new Color(118, 150, 86);
-                    else
-                        color = new Color(238, 238, 210);
+                    Color color = (col + row)%2 == 1 ? color = new Color(118, 150, 86) : new Color(238, 238, 210);
                     Block label = new Block(color, (col) % 8, row, null);
                     Chess.blocks[row][col] = label;
+                    Piece newPiece = null;
                     if (row == 0 || row == 7)
-                        switch (col) {
-                            case 0: {
-                                Rook piece = new Rook((col) % 8, row, player, label);
-                                frame.add(piece);
+                        switch (col%=8) {
+                            case 0:
+                                newPiece = new Rook(col, row, player, label);
                                 break;
-                            }
 
-                            case 1: {
-                                Knight piece = new Knight((col) % 8, row, player, label);
-                                frame.add(piece);
+                            case 1:
+                                newPiece = new Knight(col, row, player, label);
                                 break;
-                            }
 
-                            case 2: {
-                                Bishop piece = new Bishop((col) % 8, row, player, label);
-                                frame.add(piece);
+                            case 2:
+                                newPiece = new Bishop(col, row, player, label);
                                 break;
-                            }
+                            
 
-                            case 3: {
-                                Queen piece = new Queen((col) % 8, row, player, label);
-                                frame.add(piece);
+                            case 3:
+                                newPiece = new Queen(col, row, player, label);
                                 break;
-                            }
+                            
 
-                            case 4: {
-                                King piece = new King((col) % 8, row, player, label);
-                                frame.add(piece);
+                            case 4: 
+                                newPiece = new King(col, row, player, label);
                                 break;
-                            }
 
-                            case 5: {
-                                Bishop piece = new Bishop((col) % 8, row, player, label);
-                                frame.add(piece);
+                            case 5:
+                                newPiece = new Bishop(col, row, player, label);
                                 break;
-                            }
+                            
+                            case 6: 
+                                newPiece = new Knight(col, row, player, label);
+                                break;
 
-                            case 6: {
-                                Knight piece = new Knight((col) % 8, row, player, label);
-                                frame.add(piece);
-                                break;
-                            }
-
-                            case 7: {
-                                Rook piece = new Rook((col) % 8, row, player, label);
-                                frame.add(piece);
-                                break;
-                            }
-                        }
-                    else if (row == 1 || row == 6) {
-                        Pawn piece = new Pawn((col) % 8, row, player, label);
-                        frame.add(piece);
-                    }
+                            case 7: 
+                                newPiece = new Rook(col, row, player, label);
+                                break;  
+                        }    
+                    else if (row == 1 || row == 6)
+                        newPiece = new Pawn(col, row, player, label);
+                    //drawing the piece on the board
+                    frame.add(newPiece);
+                    
                 }
             }
         }
@@ -113,18 +90,14 @@ public class Chess {
         // drawing the unfilled pieces that have null pieces
         for (int row = 2; row <= 5; row++) {
             for (int col = 0; col <= 7; col++) {
-                Color color;
-                if ((col + row) % 2 == 1)
-                    color = new Color(118, 150, 86);
-                else
-                    color = new Color(238, 238, 210);
+                Color color = (col + row) % 2 == 1 ? new Color(118, 150, 86) : new Color(238, 238, 210);
                 Block label = new Block(color, (col) % 8, row, null);
                 Chess.blocks[row][col] = label;
                 new Piece(row, col, null, null, label);
             }
         }
 
-        // drawing the block on the table
+        // drawing the blocks on the table
         for (int row = 0; row <= 7; row++)
             for (int col = 0; col <= 7; col++)
                 frame.add(blocks[row][col]);
@@ -207,14 +180,9 @@ public class Chess {
 
     // reseting the color of the table
     public static void resetColor(int possibleMoves[][]) {
-        Color color;
         for (int i = 0; i < possibleMoves.length; i++) {
-            if ((possibleMoves[i][0] + possibleMoves[i][1]) % 2 == 1)
-                color = new Color(118, 150, 86);
-            else
-                color = new Color(238, 238, 210);
-            if (possibleMoves[i][0] > -1 && possibleMoves[i][1] > -1 && possibleMoves[i][0] < 8
-                    && possibleMoves[i][1] < 8)
+            Color color = (possibleMoves[i][0] + possibleMoves[i][1]) % 2 == 1 ? new Color(118, 150, 86) : new Color(238, 238, 210);
+            if (possibleMoves[i][0] > -1 && possibleMoves[i][1] > -1 && possibleMoves[i][0] < 8&& possibleMoves[i][1] < 8)
                 Chess.blocks[possibleMoves[i][1]][possibleMoves[i][0]].setBackground(color);
         }
         Chess.frame.repaint();
@@ -228,6 +196,7 @@ public class Chess {
         return null;
     }
 
+    //convert hh.mm to hh:mm
     public static String caleTimeString(String timeString) {
         double time = Double.parseDouble(timeString);
         int hours = (int) time;

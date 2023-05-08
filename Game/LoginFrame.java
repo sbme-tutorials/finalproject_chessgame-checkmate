@@ -46,7 +46,10 @@ public class LoginFrame extends JFrame implements ActionListener {
             String player1Name = player1NameInput.getText();
             String player2Name = player2NameInput.getText();
             double playTime = Double.parseDouble(playTimeInput.getText());
-            new Chess(680,player1Name, player2Name, playTime);
+            Chess chess = new Chess(480, player1Name, player2Name, playTime);
+            // set the promotion choice for each player's pawn
+            //chess.player1.setPromotionChoice(PawnPromotionDialog.showDialog(chess.frame, chess.player1));
+            //chess.player2.setPromotionChoice(PawnPromotionDialog.showDialog(chess.frame, chess.player2));
             dispose();
         }
     }

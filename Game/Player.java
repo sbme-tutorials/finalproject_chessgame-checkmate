@@ -4,6 +4,7 @@ import java.util.TimerTask;
 import javax.swing.JLabel;
 
 public class Player {
+    int promotionChoice;
     public boolean paused = true;
     Piece pieces[] = new Piece[8];
     Piece eaten_pieces[] = new Piece[16];
@@ -17,6 +18,7 @@ public class Player {
     Player(String name, double time){
         this.name = name;
         this.number = total + 1;
+        this.promotionChoice = 0;
         total++;
         this.remTime = time;
         this.timer = new Timer();
@@ -44,6 +46,14 @@ public class Player {
     }
     public void runTime(){
         this.paused = false;
+    }
+
+    public int getPromotionChoice() {
+        return promotionChoice;
+    }
+
+    public void setPromotionChoice(int promotionChoice) {
+        this.promotionChoice = promotionChoice;
     }
 }
 
