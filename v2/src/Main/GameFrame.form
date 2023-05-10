@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Main.GameFrame">
+  <grid id="27dc6" binding="infoCard" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="447" height="249"/>
+    </constraints>
+    <properties>
+      <background color="-14605001"/>
+      <foreground color="-4500737"/>
+    </properties>
+    <border type="none" title-justification="3" title-position="1">
+      <color color="-4161665"/>
+    </border>
+    <children>
+      <grid id="3a0d5" binding="p1info" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-14605001"/>
+        </properties>
+        <border type="line">
+          <color color="-16777216"/>
+        </border>
+        <children>
+          <grid id="67aa1" binding="p1NameFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints/>
+            <properties>
+              <background color="-14605001"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="bd4e4" class="javax.swing.JLabel" binding="p1Name">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-14670537"/>
+                  <font name="Academy Engraved LET" size="20" style="3"/>
+                  <foreground color="-52421"/>
+                  <horizontalTextPosition value="4"/>
+                  <icon value="passanger (1).png"/>
+                  <text value="Player One"/>
+                  <verticalAlignment value="0"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="e86dc" binding="p1timeFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="0" bottom="5" right="0"/>
+            <constraints/>
+            <properties>
+              <background color="-14605001"/>
+            </properties>
+            <border type="etched">
+              <title-color color="-16777216"/>
+            </border>
+            <children>
+              <component id="4420a" class="javax.swing.JLabel" binding="p1Timer">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="PT Mono" size="18" style="2"/>
+                  <foreground color="-1"/>
+                  <text value="04:42"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="74faf" binding="p2info" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-14605001"/>
+        </properties>
+        <border type="line">
+          <color color="-16777216"/>
+        </border>
+        <children>
+          <grid id="d2a94" binding="p2NameFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints/>
+            <properties>
+              <background color="-14605001"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="e00cc" class="javax.swing.JLabel" binding="p2Name">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-14670537"/>
+                  <font name="Academy Engraved LET" size="20" style="3"/>
+                  <foreground color="-52421"/>
+                  <horizontalTextPosition value="4"/>
+                  <icon value="passanger (1).png"/>
+                  <text value="Player Two"/>
+                  <verticalAlignment value="0"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="97739" binding="p2timeFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="0" bottom="5" right="0"/>
+            <constraints/>
+            <properties>
+              <background color="-14605001"/>
+            </properties>
+            <border type="etched">
+              <title-color color="-16777216"/>
+            </border>
+            <children>
+              <component id="2cdc2" class="javax.swing.JLabel" binding="p2Timer">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="PT Mono" size="18" style="2"/>
+                  <foreground color="-1"/>
+                  <text value="05:00"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
