@@ -1,4 +1,4 @@
-package Main;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,6 +56,7 @@ public class GameFrame extends JFrame {
         add(boardPanel, BorderLayout.CENTER);
 
         // Create a new JPanel for the info card
+        System.out.println(infoCard);
         infoCard.setPreferredSize(new Dimension(200, getHeight())); // set preferred size
         infoCard.setLayout(new BoxLayout(infoCard, BoxLayout.Y_AXIS)); // align children vertically
 

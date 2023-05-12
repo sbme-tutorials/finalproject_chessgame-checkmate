@@ -3,9 +3,7 @@ The Bishop class represents a pawn piece in a game of chess.
 It extends the Piece class and inherits its properties and methods.
 */
 
-package Pieces;
 
-import Main.Board;
 
 import java.awt.image.BufferedImage;
 

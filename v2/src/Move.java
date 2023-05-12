@@ -1,9 +1,7 @@
 /**
  * The Move class represents a move made by a chess piece on the board.
  */
-package Main;
 
-import Pieces.Piece;
 
 public class Move {
     public static int counter = 0; //Count the total number of the moves in the game

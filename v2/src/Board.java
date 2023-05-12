@@ -3,9 +3,7 @@ The Board class defines the chess board with a set number of rows and columns.
 The class extends JPanel and overrides the paintComponent method to draw the board and the pieces on it.
 It also contains methods to add and remove pieces, capture opponent pieces, check the validity of a move and get a piece object at a given location on the board.
  */
-package Main;
 
-import Pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +18,8 @@ public class Board extends JPanel {
 
     public int tileSize = 80; // size of each tile in pixels
     public Piece selectedPiece; //Piece selected by the mouse
+
+    CheckMate checkMate = new CheckMate(this);
     int rows = 8; // number of rows on the chess board
     int columns = 8; // number of columns on the chess board
     int vmCircleRadius = 30; //Valid Moves Circle Radius
@@ -54,6 +54,60 @@ public class Board extends JPanel {
         }
         return null; //If there is no pieces found in this tile
     }
+
+    //Method to check if move that will be made is valid
+    public boolean isValidMove(Move move) {
+
+        //Make sure the piece eating and eaten not at the same team
+        if (sameTeam(move.piece, move.capture)) {
+            return false;
+        }
+
+        //Set the Limits for the game board
+        if (!(move.newColumn < 8 && move.newColumn >= 0) && !(move.newRow < 8 && move.newRow >= 0)) {
+            return false;
+        }
+
+        //Check if it's piece's valid move
+        if (!move.piece.isValidMovement(move.newColumn, move.newRow)) {
+            return false;
+        }
+
+        //Hit another piece check (for pieces that can not bypass another piece)
+        if (move.piece.moveHitsPiece(move.newColumn, move.newRow)) {
+            return false;
+        }
+
+        //Check if the move will make or keep the King Checked
+        return !checkMate.isKingChecked(move);
+    }
+
+
+    //Method to check if two pieces are on same team or not
+    public boolean sameTeam(Piece p1, Piece p2) {
+        if (p1 == null || p2 == null) {
+            //Make sure there is a piece on the specified tile
+            return false;
+        }
+        return p1.isWhite == p2.isWhite;
+    }
+
+    //Method to set the turns of play
+    public boolean validTurn() {
+        return Move.counter % 2 == 0 == selectedPiece.isWhite;
+    }
+
+
+    //Method that to get the King
+    Piece findKing(boolean isWhite) {
+        for (Piece piece : gamePieceList) {
+            if (isWhite == piece.isWhite && piece.name.equals("King")) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
 
     //Method to move a piece
     public void makeMove(Move move) {
@@ -114,52 +168,9 @@ public class Board extends JPanel {
         }
     }
 
-
-    //Method to check if move that will be made is valid
-    public boolean isValidMove(Move move) {
-
-        //Method to check the validity of move of a piece
-        if (sameTeam(move.piece, move.capture)) {
-            return false;
-        }
-
-        //Set the Limits for the game board
-        if (!(move.newColumn < 8 && move.newColumn >= 0) && !(move.newRow < 8 && move.newRow >= 0)) {
-            return false;
-        }
-
-        //Check if it's piece valid move
-        if (!move.piece.isValidMovement(move.newColumn, move.newRow)) {
-            return false;
-        }
-
-        //Hit another piece check (for pieces that can not bypass another piece)
-        if (move.piece.moveHitsPiece(move.newColumn, move.newRow)) {
-            return false;
-        }
-        ;
-        return true;
-    }
-
-
-    //Method to check if two pieces are on same team or not
-    public boolean sameTeam(Piece p1, Piece p2) {
-        if (p1 == null || p2 == null) {
-            //Make sure there is a piece on the specified tile
-            return false;
-        }
-        return p1.isWhite == p2.isWhite;
-    }
-
-    //Method to set the turns of play
-    public boolean validTurn(Move move) {
-        return (Move.counter % 2 == 0) == selectedPiece.isWhite;
-    }
-
-
     //Put the pieces on the board
     public void addPiece() {
-        //Adding Pieces to the Resizeable array
+        //Adding Pieces to the Resizeable Game array
 
         //Black Pawns
         for (int c = 0; c < columns; c++) {
@@ -217,7 +228,7 @@ public class Board extends JPanel {
                     if (isValidMove(new Move(this, selectedPiece, c, r))) {
 
                         //Check if it's valid turn to play
-                        if (validTurn(new Move(this, selectedPiece, c, r))) {
+                        if (validTurn()) {
 
                             //Check if there is an enemy's piece on this tile
                             if (getPiece(c, r) == null) {

@@ -3,9 +3,7 @@
  * It extends the Piece class and inherits its attributes and methods.
  */
 
-package Pieces;
 
-import Main.Board;
 
 import java.awt.image.BufferedImage;
 
@@ -42,7 +40,7 @@ public class King extends Piece {
         columnMove = Math.abs(column - this.column);
         rowMove = Math.abs(row - this.row);
 
-        return ((columnMove <= 1 && rowMove <= 1) && ((columnMove == 0 && rowMove == 1) || (columnMove == 1 && rowMove == 0) || (columnMove == rowMove))) || canRightCastle(column, row) || canLeftCastle(column, row);
+        return  (((columnMove <= 1 && rowMove <= 1) && ((columnMove == 0 && rowMove == 1) || (columnMove == 1 && rowMove == 0) || (columnMove == rowMove))) || canRightCastle(column, row) || canLeftCastle(column, row));
     }
 
     //Castle the King to the right

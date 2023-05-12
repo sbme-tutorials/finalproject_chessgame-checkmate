@@ -2,15 +2,18 @@
 The Pawn class represents a pawn piece in a game of chess.
 It extends the Piece class and inherits its properties and methods.
 */
-package Pieces;
 
-import Main.Board;
-import Main.Move;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import java.awt.GridLayout;
+import java.util.ArrayList;
 
 public class Pawn extends Piece {
-    Move move;
+
 
     /**
      * Constructor for the Pawn class
@@ -22,6 +25,7 @@ public class Pawn extends Piece {
      */
     public Pawn(Board board, int column, int row, boolean isWhite) {
         super(board);
+        this.board = board;
         this.column = column;
         this.row = row;
         this.xPos = column * board.tileSize;
@@ -41,22 +45,26 @@ public class Pawn extends Piece {
     public boolean isValidMovement(int column, int row) {
 
         //To check if the way for the Pawn is clear or not in each direction
-        boolean isNorthOccupied, isNorthEastOccupied, isNorthWestOccupied;
+        boolean isNorthOccupied, isNorthEastOccupied, isNorthWestOccupied, isFarNorthOccupied;
         //Movements of Pawn in columns & rows
         int columnMove, rowMove;
 
-//Declare variables by a way (if the piece is white) & inverse way (if the piece is black) to have the same results
-        
+
+        //Declare variables by a way (if the piece is white) & inverse way (if the piece is black) to have the same return conditions
+
+
         //Move Direction in white pieces is inverse to black pieces
         int moveDirection = isWhite ? 1 : -1;
-
 
         //Set steps of movement for the Pawn
         columnMove = (this.column - column) * moveDirection;
         rowMove = (this.row - row) * moveDirection;
 
-        //Way in front direction
+        //Way in front direction by one step
         isNorthOccupied = board.getPiece(this.column, this.row - moveDirection) != null;
+
+        //Way in front direction by two steps
+        isFarNorthOccupied = board.getPiece(this.column, this.row - 2 * moveDirection) != null;
 
         //Way in Front Right direction
         isNorthEastOccupied = board.getPiece(this.column + moveDirection, this.row - moveDirection) != null;
@@ -67,24 +75,24 @@ public class Pawn extends Piece {
 
         //First move of pawn can be one or two tiles in column direction
         if (isFirstMove) {
-            if (isNorthOccupied && isNorthEastOccupied && isNorthWestOccupied) {
+            if ((isNorthOccupied || isFarNorthOccupied) && isNorthEastOccupied && isNorthWestOccupied) {
                 return (rowMove == 1) && (columnMove == 0 || columnMove == 1 || columnMove == -1);
-            } else if (isNorthOccupied && isNorthEastOccupied) {
+            } else if ((isNorthOccupied || isFarNorthOccupied) && isNorthEastOccupied) {
                 return (rowMove == 1) && (columnMove == 0 || columnMove == -1);
-            } else if (isNorthOccupied && isNorthWestOccupied) {
+            } else if ((isNorthOccupied || isFarNorthOccupied) && isNorthWestOccupied) {
                 return (rowMove == 1) && (columnMove == 0 || columnMove == 1);
-            } else if (isNorthOccupied) {
+            } else if ((isNorthOccupied || isFarNorthOccupied)) {
                 return (rowMove == 1) && (columnMove == 0);
             } else if (isNorthEastOccupied && isNorthWestOccupied) {
                 return (columnMove == 0 && ((rowMove == 2) || (rowMove == 1))) || (rowMove == 1 && (columnMove == 1 || columnMove == -1));
             } else if (isNorthEastOccupied) {
                 return (columnMove == 0 && ((rowMove == 2) || (rowMove == 1))) || (rowMove == 1 && (columnMove == -1));
             } else if (isNorthWestOccupied) {
-                return (columnMove == 0 && ((rowMove == 2) || (rowMove == 1))) || (rowMove == 1 && (columnMove == +1));
+                return (columnMove == 0 && ((rowMove == 2) || (rowMove == 1))) || (rowMove == 1 && (columnMove == 1));
             } else {
                 return (columnMove == 0 && ((rowMove == 2) || (rowMove == 1)));
             }
-        } 
+        }
         //If it's not the first move it can only move one step
         else {
             if (isNorthOccupied && isNorthEastOccupied && isNorthWestOccupied) {
@@ -106,4 +114,37 @@ public class Pawn extends Piece {
             }
         }
     }
+        // promote the pawn to a different piece
+        private void promote() {
+            // create a dialog box that prompts the player to choose a piece to promote to
+            Object[] options = { "Queen", "Rook", "Bishop", "Knight" };
+            int choice = JOptionPane.showOptionDialog(null,
+                    "Your pawn has reached the opposite end of the board. Choose a piece to promote to:",
+                    "Pawn Promotion",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+    
+            // create a new piece based on the player's choice
+            Piece newPiece;
+            switch (choice) {
+                case 0:
+                    newPiece = new Queen(this.board,this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
+                    break;
+                case 1:
+                    newPiece = new Rook(this.board,this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
+                    break;
+                case 2:
+                    newPiece = new Bishop(this.board, this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
+                    break;
+                case 3:
+                    newPiece = new Knight(this.board, this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Defaulting to queen promotion.");
+                    newPiece = new Queen(this.board, this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
+            }
+        }
 }

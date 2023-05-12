@@ -1,14 +1,13 @@
 /**
  * This class represents the base Piece in the chess game, defining its attributes and behavior.
  */
-package Pieces;
 
-import Main.Board;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 // Piece class definition
 public class Piece {
@@ -20,7 +19,11 @@ public class Piece {
     public boolean isFirstMove;
     public int rowEnd;
     public String name;
-    public int value;
+
+
+    //public int value;
+
+
     //Movements of Piece in columns & rows
     int columnMove, rowMove;
 
@@ -32,7 +35,7 @@ public class Piece {
     // Load sprite sheet for the pieces
     {
         try {
-            sheet = ImageIO.read(ClassLoader.getSystemResourceAsStream("pieces1.png"));
+            sheet = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("pieces1.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
