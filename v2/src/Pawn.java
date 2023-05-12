@@ -114,37 +114,4 @@ public class Pawn extends Piece {
             }
         }
     }
-        // promote the pawn to a different piece
-        private void promote() {
-            // create a dialog box that prompts the player to choose a piece to promote to
-            Object[] options = { "Queen", "Rook", "Bishop", "Knight" };
-            int choice = JOptionPane.showOptionDialog(null,
-                    "Your pawn has reached the opposite end of the board. Choose a piece to promote to:",
-                    "Pawn Promotion",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
-    
-            // create a new piece based on the player's choice
-            Piece newPiece;
-            switch (choice) {
-                case 0:
-                    newPiece = new Queen(this.board,this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
-                    break;
-                case 1:
-                    newPiece = new Rook(this.board,this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
-                    break;
-                case 2:
-                    newPiece = new Bishop(this.board, this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
-                    break;
-                case 3:
-                    newPiece = new Knight(this.board, this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
-                    break;
-                default:
-                    System.out.println("Invalid choice. Defaulting to queen promotion.");
-                    newPiece = new Queen(this.board, this.xPos/board.tileSize, this.yPos/board.tileSize, this.isWhite);
-            }
-        }
 }

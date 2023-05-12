@@ -94,7 +94,7 @@ public class Board extends JPanel {
 
     //Method to set the turns of play
     public boolean validTurn() {
-        return Move.counter % 2 == 0 == selectedPiece.isWhite;
+        return true | Move.counter % 2 == 0 == selectedPiece.isWhite;
     }
 
 
@@ -143,8 +143,25 @@ public class Board extends JPanel {
     //Method to Castle the King with the rook
     //Method to Promote the pawn to Queen
     public void pawnPromote(Move move) {
-        //Add Queen
-        gamePieceList.add(new Queen(this, move.newColumn, move.newRow, move.piece.isWhite));
+        // Display a menu to the player asking them which piece they want to promote the pawn to.
+        String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+        int choice = JOptionPane.showOptionDialog(null, "Choose a piece to promote the pawn to", "Pawn Promotion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        // Create a new piece of that type and place it on the square where the pawn was located.
+        switch (choice) {
+            case 0:
+                gamePieceList.add(new Queen(this, move.newColumn, move.newRow, move.piece.isWhite));
+                break;
+            case 1:
+                gamePieceList.add(new Rook(this, move.newColumn, move.newRow, move.piece.isWhite));
+                break;
+            case 2:
+                gamePieceList.add(new Bishop(this, move.newColumn, move.newRow, move.piece.isWhite));
+                break;
+            case 3:
+                gamePieceList.add(new Knight(this, move.newColumn, move.newRow, move.piece.isWhite));
+                break;
+        }
+
         //gamePieceList.remove(move.capture);
         capture(move.piece);
     }
