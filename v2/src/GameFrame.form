@@ -2,11 +2,12 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GameFrame">
   <grid id="27dc6" binding="infoCard" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="447" height="249"/>
+      <xy x="20" y="20" width="447" height="590"/>
     </constraints>
     <properties>
       <background color="-14605001"/>
-      <foreground color="-4500737"/>
+      <enabled value="false"/>
+      <foreground color="-131073"/>
     </properties>
     <border type="none" title-justification="3" title-position="1">
       <color color="-4161665"/>
@@ -24,7 +25,7 @@
           <color color="-16777216"/>
         </border>
         <children>
-          <grid id="67aa1" binding="p1NameFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="67aa1" binding="p1NameFrame" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints/>
             <properties>
@@ -47,28 +48,38 @@
                   <verticalTextPosition value="0"/>
                 </properties>
               </component>
-            </children>
-          </grid>
-          <grid id="e86dc" binding="p1timeFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="5" left="0" bottom="5" right="0"/>
-            <constraints/>
-            <properties>
-              <background color="-14605001"/>
-            </properties>
-            <border type="etched">
-              <title-color color="-16777216"/>
-            </border>
-            <children>
-              <component id="4420a" class="javax.swing.JLabel" binding="p1Timer">
+              <grid id="e86dc" binding="p1timeFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="5" left="0" bottom="5" right="0"/>
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <font name="PT Mono" size="18" style="2"/>
-                  <foreground color="-1"/>
-                  <text value="04:42"/>
+                  <background color="-14605001"/>
                 </properties>
-              </component>
+                <border type="etched">
+                  <title-color color="-16777216"/>
+                </border>
+                <children>
+                  <component id="4420a" class="javax.swing.JLabel" binding="p1Timer">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="PT Mono" size="18" style="2"/>
+                      <foreground color="-1"/>
+                      <text value="04:42"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="74eb4" binding="p1Eaten" layout-manager="FlowLayout" hgap="5" vgap="50" flow-align="1">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
             </children>
           </grid>
         </children>
@@ -85,7 +96,7 @@
           <color color="-16777216"/>
         </border>
         <children>
-          <grid id="d2a94" binding="p2NameFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="d2a94" binding="p2NameFrame" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints/>
             <properties>
@@ -108,28 +119,38 @@
                   <verticalTextPosition value="0"/>
                 </properties>
               </component>
-            </children>
-          </grid>
-          <grid id="97739" binding="p2timeFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="5" left="0" bottom="5" right="0"/>
-            <constraints/>
-            <properties>
-              <background color="-14605001"/>
-            </properties>
-            <border type="etched">
-              <title-color color="-16777216"/>
-            </border>
-            <children>
-              <component id="2cdc2" class="javax.swing.JLabel" binding="p2Timer">
+              <grid id="97739" binding="p2timeFrame" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="5" left="0" bottom="5" right="0"/>
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <font name="PT Mono" size="18" style="2"/>
-                  <foreground color="-1"/>
-                  <text value="05:00"/>
+                  <background color="-14605001"/>
                 </properties>
-              </component>
+                <border type="etched">
+                  <title-color color="-16777216"/>
+                </border>
+                <children>
+                  <component id="2cdc2" class="javax.swing.JLabel" binding="p2Timer">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="PT Mono" size="18" style="2"/>
+                      <foreground color="-1"/>
+                      <text value="05:00"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="5a733" binding="p2Eaten" layout-manager="FlowLayout" hgap="5" vgap="50" flow-align="1">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
             </children>
           </grid>
         </children>

@@ -2,7 +2,9 @@
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 public class GameFrame extends JFrame {
     private Board board;
     private JPanel infoCard;
@@ -16,6 +18,8 @@ public class GameFrame extends JFrame {
     private JPanel p1NameFrame;
     private JLabel p2Name;
     private JLabel p1Name;
+    private JPanel p1Eaten;
+    private JPanel p2Eaten;
 
     public GameFrame() {
         // Set the default close operation to exit the application when the window is closed
@@ -56,7 +60,6 @@ public class GameFrame extends JFrame {
         add(boardPanel, BorderLayout.CENTER);
 
         // Create a new JPanel for the info card
-        System.out.println(infoCard);
         infoCard.setPreferredSize(new Dimension(200, getHeight())); // set preferred size
         infoCard.setLayout(new BoxLayout(infoCard, BoxLayout.Y_AXIS)); // align children vertically
 
@@ -66,9 +69,20 @@ public class GameFrame extends JFrame {
 
         infoCard.add(p1info);
         infoCard.add(p2info);
-
+        JLabel lebel2 = new JLabel();
+        lebel2.setForeground(Color.BLACK);
+        ImageIcon icon;
+        icon = new ImageIcon("Pieces/black/Bishop.png");
+        //Image image = icon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+        //icon = new ImageIcon(image);
+        //lebel2.setIcon(icon);
+        p1Eaten.setLayout(new BoxLayout(p1Eaten, BoxLayout.Y_AXIS));
+        p2Eaten.setLayout(new BoxLayout(p2Eaten, BoxLayout.Y_AXIS));
+        p1Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        p2Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // Add the info card to the east (right) of the content pane
         add(infoCard, BorderLayout.EAST);
+        repaint();
 
         // Set the space between the board and the info card to zero
         ((BorderLayout) getContentPane().getLayout()).setHgap(0);
@@ -86,9 +100,19 @@ public class GameFrame extends JFrame {
         setMinimumSize(new Dimension(8 * 85 + 175 , 8 * 85));
     }
 
-
     public void start() {
         // Set the JFrame to be visible
         setVisible(true);
+    }
+
+    public void drawEatenPiece(String eatenPiece, boolean isWhite){
+        JLabel label = new JLabel();
+        label.setForeground(Color.BLACK);
+        label.setText(eatenPiece);
+        if(isWhite == true) p1Eaten.add(label);
+        else p2Eaten.add(label);
+        repaint();
+        // Pack the JFrame to its minimum size
+        pack();
     }
 }

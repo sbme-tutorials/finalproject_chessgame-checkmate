@@ -14,7 +14,8 @@ public class Board extends JPanel {
 
     // Declare Resizeable array to hold all the pieces present on the board.
     private final ArrayList<Piece> gamePieceList = new ArrayList<>();
-
+    // Declare Resizeable array to hold all the eaten pieces.
+    private final ArrayList<Piece> eatenPiecesList = new ArrayList<>();
 
     public int tileSize = 80; // size of each tile in pixels
     public Piece selectedPiece; //Piece selected by the mouse
@@ -138,6 +139,10 @@ public class Board extends JPanel {
         //Method to remove the eaten piece from the game
         //Remove the piece from the resizeable array
         gamePieceList.remove(piece);
+        eatenPiecesList.add(piece);
+        if (piece!=null){
+            Main.frame.drawEatenPiece(piece.name,piece.isWhite);
+        }
     }
 
     //Method to Castle the King with the rook
