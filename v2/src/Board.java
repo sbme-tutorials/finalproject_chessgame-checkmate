@@ -93,7 +93,7 @@ public class Board extends JPanel {
 
     //Method to set the turns of play
     public boolean validTurn() {
-        return true||Move.counter % 2 == 0 == selectedPiece.isWhite;
+        return Move.counter % 2 == 0 == selectedPiece.isWhite;
     }
 
 
@@ -157,7 +157,7 @@ public class Board extends JPanel {
                         }
                     }
                     GameFrame.p1EatenPieces[count]=piece.name;
-                    Main.frame.drawEatenPiece(piece.name,piece.isWhite);
+                    Main.frame.drawEatenPiece(piece.name,!piece.isWhite);
                 }
             }
             else{

@@ -91,6 +91,15 @@ public class GameFrame extends JFrame {
 
         p1Eaten.setOpaque(false);
         p2Eaten.setOpaque(false);
+        p1EatenR1.setOpaque(false);
+        p2EatenR2.setOpaque(false);
+        p1EatenR3.setOpaque(false);
+        p2EatenR4.setOpaque(false);
+        p1EatenR1.setOpaque(false);
+        p2EatenR1.setOpaque(false);
+        p1EatenR2.setOpaque(false);
+        p2EatenR3.setOpaque(false);
+        p1EatenR4.setOpaque(false);
         //p1Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         //p2Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // Add the info card to the east (right) of the content pane
@@ -131,9 +140,9 @@ public class GameFrame extends JFrame {
             else if(count <= 12) rowPanel = p1EatenR3;
             else rowPanel = p1EatenR4;
         else
-            if(count % 4 == 0) rowPanel = p2EatenR1;
-            else if(count % 4 == 1) rowPanel = p2EatenR2;
-            else if(count % 4 == 2) rowPanel = p2EatenR3;
+            if(count <= 4) rowPanel = p2EatenR1;
+            else if(count <= 8) rowPanel = p2EatenR2;
+            else if(count <= 12) rowPanel = p2EatenR3;
             else rowPanel = p2EatenR4;
 
 

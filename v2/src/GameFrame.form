@@ -72,7 +72,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="74eb4" binding="p1Eaten" layout-manager="FlowLayout" hgap="5" vgap="50" flow-align="1">
+              <grid id="74eb4" binding="p1Eaten" layout-manager="FlowLayout" hgap="5" vgap="0" flow-align="1">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -171,7 +171,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="5a733" binding="p2Eaten" layout-manager="FlowLayout" hgap="5" vgap="50" flow-align="1">
+              <grid id="5a733" binding="p2Eaten" layout-manager="FlowLayout" hgap="5" vgap="0" flow-align="1">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
