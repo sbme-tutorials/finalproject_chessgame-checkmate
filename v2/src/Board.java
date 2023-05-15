@@ -14,8 +14,6 @@ public class Board extends JPanel {
 
     // Declare Resizeable array to hold all the pieces present on the board.
     private final ArrayList<Piece> gamePieceList = new ArrayList<>();
-    // Declare Resizeable array to hold all the eaten pieces.
-    private final ArrayList<Piece> eatenPiecesList = new ArrayList<>();
 
     public int tileSize = 80; // size of each tile in pixels
     public Piece selectedPiece; //Piece selected by the mouse
@@ -95,7 +93,7 @@ public class Board extends JPanel {
 
     //Method to set the turns of play
     public boolean validTurn() {
-        return Move.counter % 2 == 0 == selectedPiece.isWhite;
+        return true||Move.counter % 2 == 0 == selectedPiece.isWhite;
     }
 
 
@@ -118,7 +116,7 @@ public class Board extends JPanel {
         move.piece.xPos = move.newColumn * tileSize;
         move.piece.yPos = move.newRow * tileSize;
 
-        capture(move.capture); // Capture enemy's piece presented in the selected tile
+        capture(move.capture,false); // Capture enemy's piece presented in the selected tile
 
         //Pawn Promotion if it reaches the End Row
         if (move.piece.name.equals("Pawn") && move.piece.row == move.piece.rowEnd) {
@@ -135,13 +133,55 @@ public class Board extends JPanel {
         move.piece.isFirstMove = false;
     }
 
-    public void capture(Piece piece) {
+    public void capture(Piece piece,Boolean promotion) {
         //Method to remove the eaten piece from the game
         //Remove the piece from the resizeable array
         gamePieceList.remove(piece);
-        eatenPiecesList.add(piece);
         if (piece!=null){
-            Main.frame.drawEatenPiece(piece.name,piece.isWhite);
+            if(promotion){
+                if(!piece.isWhite){
+                    int count = 0;
+                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++) {
+                        if (GameFrame.p2EatenPieces[i] != null) {
+                            count++;
+                        }
+                    }
+                    GameFrame.p2EatenPieces[count]=piece.name;
+                    Main.frame.drawEatenPiece(piece.name,!piece.isWhite);
+                }
+                else{
+                    int count = 0;
+                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++) {
+                        if (GameFrame.p1EatenPieces[i] != null) {
+                            count++;
+                        }
+                    }
+                    GameFrame.p1EatenPieces[count]=piece.name;
+                    Main.frame.drawEatenPiece(piece.name,piece.isWhite);
+                }
+            }
+            else{
+                if(piece.isWhite){
+                    int count = 0;
+                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++) {
+                        if (GameFrame.p2EatenPieces[i] != null) {
+                            count++;
+                        }
+                    }
+                    GameFrame.p2EatenPieces[count]=piece.name;
+                    Main.frame.drawEatenPiece(piece.name,piece.isWhite);
+                }
+                else{
+                    int count = 0;
+                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++) {
+                        if (GameFrame.p1EatenPieces[i] != null) {
+                            count++;
+                        }
+                    }
+                    GameFrame.p1EatenPieces[count]=piece.name;
+                    Main.frame.drawEatenPiece(piece.name,piece.isWhite);
+                }
+            }
         }
     }
 
@@ -168,7 +208,7 @@ public class Board extends JPanel {
         }
 
         //gamePieceList.remove(move.capture);
-        capture(move.piece);
+        capture(move.piece,true);
     }
 
 

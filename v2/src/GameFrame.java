@@ -20,6 +20,17 @@ public class GameFrame extends JFrame {
     private JLabel p1Name;
     private JPanel p1Eaten;
     private JPanel p2Eaten;
+    private JPanel p1EatenR1;
+    private JPanel p1EatenR2;
+    private JPanel p1EatenR3;
+    private JPanel p1EatenR4;
+    private JPanel p2EatenR1;
+    private JPanel p2EatenR2;
+    private JPanel p2EatenR3;
+    private JPanel p2EatenR4;
+
+    public static String[] p1EatenPieces = new String[16];
+    public static String[] p2EatenPieces = new String[16];
 
     public GameFrame() {
         // Set the default close operation to exit the application when the window is closed
@@ -69,17 +80,19 @@ public class GameFrame extends JFrame {
 
         infoCard.add(p1info);
         infoCard.add(p2info);
-        JLabel lebel2 = new JLabel();
-        lebel2.setForeground(Color.BLACK);
-        ImageIcon icon;
-        icon = new ImageIcon("Pieces/black/Bishop.png");
-        //Image image = icon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
-        //icon = new ImageIcon(image);
-        //lebel2.setIcon(icon);
+
+        //p1Eaten.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        //p2Eaten.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         p1Eaten.setLayout(new BoxLayout(p1Eaten, BoxLayout.Y_AXIS));
         p2Eaten.setLayout(new BoxLayout(p2Eaten, BoxLayout.Y_AXIS));
-        p1Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        p2Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        p1Eaten.setMaximumSize(new Dimension(400, Integer.MAX_VALUE)); // Set maximum width of panel
+        p2Eaten.setMaximumSize(new Dimension(400, Integer.MAX_VALUE)); // Set maximum width of panel
+        //p2Eaten.setLayout(new BoxLayout(p2Eaten, BoxLayout.X_AXIS));
+
+        p1Eaten.setOpaque(false);
+        p2Eaten.setOpaque(false);
+        //p1Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        //p2Eaten.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         // Add the info card to the east (right) of the content pane
         add(infoCard, BorderLayout.EAST);
         repaint();
@@ -106,11 +119,39 @@ public class GameFrame extends JFrame {
     }
 
     public void drawEatenPiece(String eatenPiece, boolean isWhite){
+        //counting the number of row to be added
+        int count = 0;
+        for (int i = 0; i < (!isWhite ? GameFrame.p1EatenPieces.length:GameFrame.p2EatenPieces.length); i++)
+            if ((!isWhite ? GameFrame.p1EatenPieces[i]:GameFrame.p2EatenPieces[i]) != null) count++;
+        // Create a new rowPanel with a FlowLayout
+        JPanel rowPanel;
+        if(isWhite)
+            if(count <= 4) rowPanel = p1EatenR1;
+            else if(count <= 8) rowPanel = p1EatenR2;
+            else if(count <= 12) rowPanel = p1EatenR3;
+            else rowPanel = p1EatenR4;
+        else
+            if(count % 4 == 0) rowPanel = p2EatenR1;
+            else if(count % 4 == 1) rowPanel = p2EatenR2;
+            else if(count % 4 == 2) rowPanel = p2EatenR3;
+            else rowPanel = p2EatenR4;
+
+
+        rowPanel.setOpaque(false);
+        rowPanel.setBackground(new Color(33,37,55));
+        rowPanel.setMaximumSize(new Dimension(300, 30)); // Set maximum width and height of rowPanel
         JLabel label = new JLabel();
-        label.setForeground(Color.BLACK);
-        label.setText(eatenPiece);
-        if(isWhite == true) p1Eaten.add(label);
-        else p2Eaten.add(label);
+        ImageIcon icon;
+        String color = isWhite?"white":"black";
+        icon = new ImageIcon("v2/src/Pieces/"+color+"/"+eatenPiece+".png");
+        Image image = icon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(image);
+        label.setIcon(icon);
+        label.setOpaque(false);
+        label.setBorder(null);
+        label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        label.setPreferredSize(new Dimension(30, 30)); // Set preferred size of JLabel
+        rowPanel.add(label);
         repaint();
         // Pack the JFrame to its minimum size
         pack();
