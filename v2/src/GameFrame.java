@@ -32,6 +32,8 @@ public class GameFrame extends JFrame {
     public static String[] p1EatenPieces = new String[16];
     public static String[] p2EatenPieces = new String[16];
 
+    public static String p1NameText,p2NameText,theme;
+
     public GameFrame() {
         // Set the default close operation to exit the application when the window is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,8 +77,8 @@ public class GameFrame extends JFrame {
         infoCard.setLayout(new BoxLayout(infoCard, BoxLayout.Y_AXIS)); // align children vertically
 
         // Add components to the info card
-        p1Name.setText("Yassien");
-        p2Name.setText("Ahmed");
+        p1Name.setText(p1NameText);
+        p2Name.setText(p2NameText);
 
         infoCard.add(p1info);
         infoCard.add(p2info);

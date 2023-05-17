@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Board extends JPanel {
 
     // Declare Resizeable array to hold all the pieces present on the board.
-    private final ArrayList<Piece> gamePieceList = new ArrayList<>();
+    static ArrayList<Piece> gamePieceList = new ArrayList<>();
 
     public int tileSize = 80; // size of each tile in pixels
     public Piece selectedPiece; //Piece selected by the mouse
@@ -25,14 +25,23 @@ public class Board extends JPanel {
 
 
     // Define two colors (Dark & Light) for the tiles
-    Color color1 = new Color(118, 150, 86);
-    Color color2 = new Color(225, 225, 225);
+
+
+
 
     Input input = new Input(this);//Define object from Class Input
-
+    Color color1,color2;
 
     // Board constructor
     public Board() {
+        if(GameFrame.theme == "1"){
+            color1 = new Color(118, 150, 86);
+            color2 = new Color(225, 225, 225);
+        }
+        else if(GameFrame.theme == "2"){
+            color1 = new Color(11, 15, 86);
+            color2 = new Color(225, 225, 225);
+        }
         // Set the size of the board panel
         this.setPreferredSize(new Dimension(columns * tileSize, rows * tileSize));
 
@@ -106,28 +115,122 @@ public class Board extends JPanel {
 
     //Method to move a piece
     public void makeMove(Move move) {
-        // Update the position of the piece being moved
-        move.piece.column = move.newColumn;
-        move.piece.row = move.newRow;
-        move.piece.xPos = move.newColumn * tileSize;
-        move.piece.yPos = move.newRow * tileSize;
+        if(move.piece!=null){
+            // Update the position of the piece being moved
+            move.piece.column = move.newColumn;
+            move.piece.row = move.newRow;
+            move.piece.xPos = move.newColumn * tileSize;
+            move.piece.yPos = move.newRow * tileSize;
 
-        capture(move.capture,false); // Capture enemy's piece presented in the selected tile
-
-        //Pawn Promotion if it reaches the End Row
-        if (move.piece.name.equals("Pawn") && move.piece.row == move.piece.rowEnd) {
-            pawnPromote(move);
+            capture(move.capture,false); // Capture enemy's piece presented in the selected tile
+            //Set the 'isFirstMove' boolean to false
+            move.piece.isFirstMove = false;
+            //Pawn Promotion if it reaches the End Row
+            if (move.piece.name.equals("Pawn") && move.piece.row == move.piece.rowEnd) {
+                pawnPromote(move);
+            }
+            //Open the option for King Castling if it's King first move
+            if (move.piece.name.equals("King") && move.piece.isFirstMove) {
+                kingCastle(move);
+            }
         }
-
-
-        //Open the option for King Castling if it's King first move
-        if (move.piece.name.equals("King") && move.piece.isFirstMove) {
-            kingCastle(move);
+        // Check if the move puts the current player's king in check
+        if (isKingInCheck(move)) {
+            // The current player's king is in check, so the game is over.
+            JOptionPane.showMessageDialog(null, "game-oveeeeeer");
+            return;
         }
-
-        //Set the 'isFirstMove' boolean to false
-        move.piece.isFirstMove = false;
     }
+
+
+    public boolean isKingInCheck(Move move) {
+
+        // Find the player's king
+        Piece king = findKing(!move.piece.isWhite);
+        if (king == null) {
+            return false;
+        }
+
+        boolean attacked = false;
+        boolean ptotected_piece = false,hasValidMoves=false;
+
+        // Check if the king is attacked by any of the enemy pieces
+        for (Piece piece : gamePieceList) {
+            if (piece.isWhite == move.piece.isWhite) {
+                if (piece.canAttack(king.column, king.row)) {;
+                    attacked = true;
+                    break;
+                }
+            }
+        }
+
+        // Check if the king is protected by any of the player's pieces
+        for (Piece piece : gamePieceList) {
+            if (piece.isWhite != move.piece.isWhite) {
+                if (canProtect(king.column, king.row,piece)) {
+                    ptotected_piece = true;
+                    break;
+                }
+            }
+        }
+
+        // Check if the king has any valid moves to escape the check
+        for (int i = king.column - 1; i <= king.column + 1; i++) {
+            for (int j = king.row - 1; j <= king.row + 1; j++) {
+                if (i == king.column && j == king.row) {
+                    continue;
+                }
+                if (i >= 0 && i < 8 && j >= 0 && j < 8) {
+
+                    if (isValidMove(new Move(this, king, i, j))) {
+                        hasValidMoves = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println(attacked);
+        System.out.println(ptotected_piece);
+        System.out.println(hasValidMoves);
+        if(attacked){
+            if(ptotected_piece||hasValidMoves){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    /**
+     * Returns the position of the king of the specified color.
+     *
+     * @param isWhite true if the king is white, false if the king is black.
+     * @return the position of the king.
+     */
+    public int[] getKingPosition(boolean isWhite) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                Piece piece = getPiece(col, row);
+                if (piece instanceof King && piece.isWhite == isWhite) {
+                    System.out.println("case 2");
+                    return new int[]{col, row};
+
+                }
+            }
+        }
+        return null; // King not found on the board
+    }
+
+
+
+    // Helper method to check if the current player's king is in check
+
 
     public void capture(Piece piece,Boolean promotion) {
         //Method to remove the eaten piece from the game
@@ -141,9 +244,14 @@ public class Board extends JPanel {
             for (String eatenPiece : eatenPiecesArr)
                 if (eatenPiece != null) count++;
             eatenPiecesArr[count]=piece.name;
-            //drawing it ti the frame
+            //drawing it to the main frame
             Main.frame.drawEatenPiece(piece.name,promotion?!piece.isWhite:piece.isWhite);
         }
+    }
+
+    public boolean canProtect(int column, int row,Piece piece) {
+        // Check if the piece can move to the specified tile to protect the king
+        return isValidMove(new Move(this, piece, column, row));
     }
 
     //Method to Castle the King with the rook

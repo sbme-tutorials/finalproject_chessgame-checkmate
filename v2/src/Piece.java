@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 // Piece class definition
@@ -87,6 +88,23 @@ public class Piece {
      */
 
     public boolean moveHitsPiece(int column, int row) {
+        return false;
+    }
+
+    /**
+     * Checks if a Piece object can attack another Piece object at a given location.
+     *
+     * @param column The column of the Piece to be attacked.
+     * @param row    The row of the Piece to be attacked.
+     * @return true if the Piece can attack the other Piece, false otherwise.
+     */
+    public boolean canAttack(int column, int row) {
+        // Check if the given location is occupied by a Piece of the opposite color
+        Piece piece = board.getPiece(column, row);
+        if (piece != null && piece.isWhite != this.isWhite) {
+            // Check if the Piece can move to the given location
+            return isValidMovement(column, row);
+        }
         return false;
     }
 }

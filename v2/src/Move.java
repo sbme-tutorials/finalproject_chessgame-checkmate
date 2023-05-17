@@ -22,6 +22,7 @@ public class Move {
      * @param newRow    the new row position of the piece
      */
     public Move(Board board, Piece piece, int newColumn, int newRow) {
+
         this.oldColumn = piece.column;
         this.oldRow = piece.row;
         this.newColumn = newColumn;
