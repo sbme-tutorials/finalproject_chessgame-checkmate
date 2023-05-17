@@ -40,7 +40,7 @@ public class GameFrame extends JFrame {
         setTitle("Check-Mate");
 
         // Set the background color Background
-        getContentPane().setBackground(new Color(33, 37, 55, 255));
+        getContentPane().setBackground(new Color(34, 32, 29 ));
 
         // Create a new JPanel with a GridBagLayout as the container for the Board panel
         JPanel boardPanel = new JPanel(new GridBagLayout());

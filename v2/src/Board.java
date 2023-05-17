@@ -46,11 +46,9 @@ public class Board extends JPanel {
 
     //Method return a piece held in a specific tile
     public Piece getPiece(int column, int row) {
-        for (Piece piece : gamePieceList) {
-            if ((piece.column == column) && (piece.row == row)) {
+        for (Piece piece : gamePieceList)
+            if ((piece.column == column) && (piece.row == row))
                 return piece;
-            }
-        }
         return null; //If there is no pieces found in this tile
     }
 
@@ -99,11 +97,9 @@ public class Board extends JPanel {
 
     //Method that to get the King
     Piece findKing(boolean isWhite) {
-        for (Piece piece : gamePieceList) {
-            if (isWhite == piece.isWhite && piece.name.equals("King")) {
+        for (Piece piece : gamePieceList)
+            if (isWhite == piece.isWhite && piece.name.equals("King"))
                 return piece;
-            }
-        }
         return null;
     }
 
@@ -137,39 +133,16 @@ public class Board extends JPanel {
         //Method to remove the eaten piece from the game
         //Remove the piece from the resizeable array
         gamePieceList.remove(piece);
+        //drawing eaten pieces on the player panel
         if (piece!=null){
-            if(promotion){
-                if(!piece.isWhite){
-                    int count = 0;
-                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++)
-                        if (GameFrame.p2EatenPieces[i] != null) count++;
-                    GameFrame.p2EatenPieces[count]=piece.name;
-                    Main.frame.drawEatenPiece(piece.name,!piece.isWhite);
-                }
-                else{
-                    int count = 0;
-                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++)
-                        if (GameFrame.p1EatenPieces[i] != null) count++;
-                    GameFrame.p1EatenPieces[count]=piece.name;
-                    Main.frame.drawEatenPiece(piece.name,!piece.isWhite);
-                }
-            }
-            else{
-                if(piece.isWhite){
-                    int count = 0;
-                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++)
-                        if (GameFrame.p2EatenPieces[i] != null) count++;
-                    GameFrame.p2EatenPieces[count]=piece.name;
-                    Main.frame.drawEatenPiece(piece.name,piece.isWhite);
-                }
-                else{
-                    int count = 0;
-                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++)
-                        if (GameFrame.p1EatenPieces[i] != null) count++;
-                    GameFrame.p1EatenPieces[count]=piece.name;
-                    Main.frame.drawEatenPiece(piece.name,piece.isWhite);
-                }
-            }
+            String[] eatenPiecesArr = piece.isWhite ? GameFrame.p2EatenPieces : GameFrame.p1EatenPieces;
+            //pushing the new eaten piece to its list
+            int count = 0;
+            for (String eatenPiece : eatenPiecesArr)
+                if (eatenPiece != null) count++;
+            eatenPiecesArr[count]=piece.name;
+            //drawing it ti the frame
+            Main.frame.drawEatenPiece(piece.name,promotion?!piece.isWhite:piece.isWhite);
         }
     }
 
