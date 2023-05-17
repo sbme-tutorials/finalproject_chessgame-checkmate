@@ -157,8 +157,7 @@ public class GameFrame extends JFrame {
         icon = new ImageIcon(image);
         label.setIcon(icon);
         label.setOpaque(false);
-        label.setBorder(null);
-        label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        label.setBorder(BorderFactory.createEmptyBorder()); // set null border
         label.setPreferredSize(new Dimension(30, 30)); // Set preferred size of JLabel
         rowPanel.add(label);
         repaint();

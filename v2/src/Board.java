@@ -25,7 +25,7 @@ public class Board extends JPanel {
 
 
     // Define two colors (Dark & Light) for the tiles
-    Color color1 = new Color(20, 30, 75);
+    Color color1 = new Color(118, 150, 86);
     Color color2 = new Color(225, 225, 225);
 
     Input input = new Input(this);//Define object from Class Input
@@ -141,21 +141,15 @@ public class Board extends JPanel {
             if(promotion){
                 if(!piece.isWhite){
                     int count = 0;
-                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++) {
-                        if (GameFrame.p2EatenPieces[i] != null) {
-                            count++;
-                        }
-                    }
+                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++)
+                        if (GameFrame.p2EatenPieces[i] != null) count++;
                     GameFrame.p2EatenPieces[count]=piece.name;
                     Main.frame.drawEatenPiece(piece.name,!piece.isWhite);
                 }
                 else{
                     int count = 0;
-                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++) {
-                        if (GameFrame.p1EatenPieces[i] != null) {
-                            count++;
-                        }
-                    }
+                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++)
+                        if (GameFrame.p1EatenPieces[i] != null) count++;
                     GameFrame.p1EatenPieces[count]=piece.name;
                     Main.frame.drawEatenPiece(piece.name,!piece.isWhite);
                 }
@@ -163,21 +157,15 @@ public class Board extends JPanel {
             else{
                 if(piece.isWhite){
                     int count = 0;
-                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++) {
-                        if (GameFrame.p2EatenPieces[i] != null) {
-                            count++;
-                        }
-                    }
+                    for (int i = 0; i < GameFrame.p2EatenPieces.length; i++)
+                        if (GameFrame.p2EatenPieces[i] != null) count++;
                     GameFrame.p2EatenPieces[count]=piece.name;
                     Main.frame.drawEatenPiece(piece.name,piece.isWhite);
                 }
                 else{
                     int count = 0;
-                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++) {
-                        if (GameFrame.p1EatenPieces[i] != null) {
-                            count++;
-                        }
-                    }
+                    for (int i = 0; i < GameFrame.p1EatenPieces.length; i++)
+                        if (GameFrame.p1EatenPieces[i] != null) count++;
                     GameFrame.p1EatenPieces[count]=piece.name;
                     Main.frame.drawEatenPiece(piece.name,piece.isWhite);
                 }
