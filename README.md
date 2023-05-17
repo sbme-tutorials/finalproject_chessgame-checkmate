@@ -7,7 +7,7 @@ This project is an implementation of a basic chess game using Java Swing. The ga
 
 Here are some screenshots of my project:
 
-![Screenshot 1](/1_deliverables/chess_table.png)
+![Screenshot 1](/1_deliverables/chess_board.PNG)
 
 ## Getting Started
 
