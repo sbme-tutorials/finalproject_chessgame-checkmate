@@ -175,7 +175,7 @@ public class Board extends JPanel {
         }
 
         // Check if the king has any valid moves to escape the check
-        for (int i = king.column - 1; i <= king.column + 1; i++) {
+        /*for (int i = king.column - 1; i <= king.column + 1; i++) {
             for (int j = king.row - 1; j <= king.row + 1; j++) {
                 if (i == king.column && j == king.row) {
                     continue;
@@ -188,17 +188,35 @@ public class Board extends JPanel {
                     }
                 }
             }
+
+
+        }*/
+        if(isValidMove(new Move(this, king, king.column-1, king.row-1)) ||
+                isValidMove(new Move(this, king, king.column-1, king.row+1)) ||
+                isValidMove(new Move(this, king, king.column-1, king.row)) ||
+                isValidMove(new Move(this, king, king.column+1, king.row-1)) ||
+                isValidMove(new Move(this, king, king.column+1, king.row+1)) ||
+                isValidMove(new Move(this, king, king.column+1, king.row)) ||
+                isValidMove(new Move(this, king, king.column, king.row-1))||
+                isValidMove(new Move(this, king, king.column, king.row+1))){
+
         }
 
         System.out.println(attacked);
         System.out.println(ptotected_piece);
         System.out.println(hasValidMoves);
         if(attacked){
-            if(ptotected_piece||hasValidMoves){
+            if(ptotected_piece){
                 return false;
             }
             else{
-                return true;
+                if(hasValidMoves){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+
             }
         }
         else{
@@ -251,7 +269,15 @@ public class Board extends JPanel {
 
     public boolean canProtect(int column, int row,Piece piece) {
         // Check if the piece can move to the specified tile to protect the king
-        return isValidMove(new Move(this, piece, column, row));
+        return isValidMove(new Move(this, piece, column, row ));
+        /*return isValidMove(new Move(this, piece, column - 1, row - 1)) ||
+                isValidMove(new Move(this, piece, column - 1, row + 1)) ||
+                isValidMove(new Move(this, piece, column - 1, row)) ||
+                isValidMove(new Move(this, piece, column + 1, row - 1)) ||
+                isValidMove(new Move(this, piece, column + 1, row + 1)) ||
+                isValidMove(new Move(this, piece, column + 1, row)) ||
+                isValidMove(new Move(this, piece, column, row - 1)) ||
+                isValidMove(new Move(this, piece, column,row + 1));*/
     }
 
     //Method to Castle the King with the rook
@@ -342,11 +368,13 @@ public class Board extends JPanel {
     // Override the paintComponent method to draw the game
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+
+        //Draw the board
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                // Set the color of the current square based on its position on the board
+                // Set the color of the current tile based on its position on the board
                 g2d.setColor((c + r) % 2 == 0 ? color2 : color1);
-                // Fill the current square with the selected color
+                // Fill the current tile with the selected color
                 g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
             }
         }
@@ -415,6 +443,21 @@ public class Board extends JPanel {
                 }
             }
         }
+
+
+        if (selectedPiece != null && checkMate.isKingChecked(new Move(this, selectedPiece, selectedPiece.column, selectedPiece.row))) {
+            boolean kingCheckedIsWhite = (Move.counter % 2 == 0);
+            int kingColumn = findKing(kingCheckedIsWhite).column;
+            int kingRow = findKing(kingCheckedIsWhite).row;
+            //Set the fill color to red and fill the tile
+            g2d.setColor(Color.BLACK);
+            g2d.setStroke(new BasicStroke(5));
+            g2d.drawRoundRect(kingColumn * tileSize, kingRow * tileSize, tileSize, tileSize, tileSize, tileSize);
+            g2d.setColor(new Color(255, 51, 59));
+            g2d.fillOval(kingColumn * tileSize + 2, kingRow * tileSize + 2, tileSize - 4, tileSize - 4);
+        }
+
+
         //Draw each piece on the Board
         for (Piece piece : gamePieceList) {
             piece.paint(g2d);
