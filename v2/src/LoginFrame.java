@@ -63,13 +63,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 
         JPanel playTimePanel = new JPanel();
         playTimePanel.setBackground(Color.BLACK);
-        JLabel timerLabel = new JLabel("Play Time (in minutes): ");
+        JLabel timerLabel = new JLabel("Theme: ");
         timerLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         timerLabel.setForeground(Color.WHITE);
         playTimePanel.add(timerLabel);
 
         // Create a combo box with items 1, 2, and 3
-        String[] playTimeValues = {"1", "2", "3"};
+        String[] playTimeValues = {"Green", "Blue"};
         playTimeComboBox = new JComboBox<String>(playTimeValues);
         playTimePanel.add(playTimeComboBox);
 
@@ -91,12 +91,17 @@ public class LoginFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startGameButton) {
-            String player1Name = player1NameInput.getText();
-            String player2Name = player2NameInput.getText();
+            String player1Name = "Player 1";
+            String player2Name = "Player 2";
+            if(player1NameInput.getText()==null)
+            player1Name = player1NameInput.getText();
+            if(player2NameInput.getText()==null)
+            player2Name = player2NameInput.getText();
             String theme = (String) playTimeComboBox.getSelectedItem();
             GameFrame.p1NameText = player1Name;
             GameFrame.p2NameText = player2Name;
             GameFrame.theme = theme;
+
             // Create a new GameFrame object
             GameFrame gameFrame = new GameFrame();
             Main.frame = gameFrame;

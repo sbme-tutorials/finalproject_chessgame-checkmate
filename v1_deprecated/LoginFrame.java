@@ -24,7 +24,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         player2Panel.add(player2NameInput);
 
         JPanel playTimePanel = new JPanel();
-        playTimePanel.add(new JLabel("Play Time (in minutes): "));
+        playTimePanel.add(new JLabel("Theme: "));
         playTimeInput = new JTextField(5);
         playTimePanel.add(playTimeInput);
 

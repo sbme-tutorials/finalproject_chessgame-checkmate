@@ -34,11 +34,11 @@ public class Board extends JPanel {
 
     // Board constructor
     public Board() {
-        if(GameFrame.theme == "1"){
+        if(GameFrame.theme == "Green"){
             color1 = new Color(118, 150, 86);
             color2 = new Color(225, 225, 225);
         }
-        else if(GameFrame.theme == "2"){
+        else if(GameFrame.theme == "Blue"){
             color1 = new Color(11, 15, 86);
             color2 = new Color(225, 225, 225);
         }
@@ -137,7 +137,9 @@ public class Board extends JPanel {
         // Check if the move puts the current player's king in check
         if (isKingInCheck(move)) {
             // The current player's king is in check, so the game is over.
-            JOptionPane.showMessageDialog(null, "game-oveeeeeer");
+            //JOptionPane.showMessageDialog(null, "game-over");
+            new GameOver();
+            Main.frame.dispose();
             return;
         }
     }

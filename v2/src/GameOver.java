@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class GameOver extends JFrame implements ActionListener {
+public class GameOver extends JFrame {
     private JTextField player1NameInput;
     private JTextField player2NameInput;
     private JComboBox<String> playTimeComboBox;
@@ -36,40 +36,24 @@ public class GameOver extends JFrame implements ActionListener {
 
         // Set the content pane to the custom JPanel
         setContentPane(panel);
-        JPanel player1Panel = new JPanel();
+        JPanel gameOverPanel = new JPanel();
         JLabel name1Label = new JLabel("Game Over");
         name1Label.setForeground(Color.WHITE);
         name1Label.setFont(new Font("Arial", Font.PLAIN, 36));
-        player1Panel.add(name1Label);
-        player1Panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        player1Panel.setOpaque(true);
-        player1Panel.setBackground(null);
-        player1Panel.setForeground(Color.WHITE);
+        name1Label.setBackground(new Color(0, 0, 0, 0));
+        name1Label.setOpaque(false);
+        gameOverPanel.setBackground(new Color(0, 0, 0, 0));
+        gameOverPanel.add(name1Label);
+        gameOverPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        gameOverPanel.setForeground(Color.WHITE);
 
 
         JPanel mainPanel = new JPanel(new GridLayout(1, 1));
-        mainPanel.add(player1Panel);
+        mainPanel.add(gameOverPanel);
 
         add(mainPanel);
 
         setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == startGameButton) {
-            String player1Name = player1NameInput.getText();
-            String player2Name = player2NameInput.getText();
-            String theme = (String) playTimeComboBox.getSelectedItem();
-            GameFrame.p1NameText = player1Name;
-            GameFrame.p2NameText = player2Name;
-            GameFrame.theme = theme;
-            // Create a new GameFrame object
-            GameFrame gameFrame = new GameFrame();
-            Main.frame = gameFrame;
-            // Call the start method to make the GameFrame visible
-            gameFrame.start();
-            // set the promotion choice for each player's pawn
-            dispose();
-        }
-    }
 }
