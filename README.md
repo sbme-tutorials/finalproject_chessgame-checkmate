@@ -23,7 +23,6 @@ The game includes basic chess rules such as checking, capturing, and castling. I
 
 The game includes several customizable parameters that can be adjusted in the `Chess` constructor in the `Main` class, including:
 
-- `frameSize`: the size of the game board in pixels
 - `player1Name` and `player2Name`: the names of the two players
 - `Theme`: we have two aesome themes (Dark - Green)
 
