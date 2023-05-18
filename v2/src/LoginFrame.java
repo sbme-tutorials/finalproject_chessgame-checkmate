@@ -29,7 +29,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 
         // Load the background image
         try {
-            backgroundImage = ImageIO.read(new File("background.jpg"));
+            backgroundImage = ImageIO.read(new File("v2/src/background.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

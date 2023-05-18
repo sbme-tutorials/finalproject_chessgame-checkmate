@@ -154,7 +154,7 @@ public class GameFrame extends JFrame {
         JLabel label = new JLabel();
         ImageIcon icon;
         String color = isWhite?"white":"black";
-        icon = new ImageIcon("Pieces/"+color+"/"+eatenPiece+".png");
+        icon = new ImageIcon("v2/src/Pieces/"+color+"/"+eatenPiece+".png");
         Image image = icon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
         icon = new ImageIcon(image);
         label.setIcon(icon);
