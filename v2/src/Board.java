@@ -135,7 +135,7 @@ public class Board extends JPanel {
             }
         }
         // Check if the move puts the current player's king in check
-        if (isKingInCheck(move)) {
+        if (isGameOver(move)) {
             // The current player's king is in check, so the game is over.
             //JOptionPane.showMessageDialog(null, "game-over");
             new GameOver();
@@ -145,7 +145,7 @@ public class Board extends JPanel {
     }
 
 
-    public boolean isKingInCheck(Move move) {
+    public boolean isGameOver(Move move) {
 
         // Find the player's king
         Piece king = findKing(!move.piece.isWhite);
@@ -177,7 +177,7 @@ public class Board extends JPanel {
         }
 
         // Check if the king has any valid moves to escape the check
-        /*for (int i = king.column - 1; i <= king.column + 1; i++) {
+        for (int i = king.column - 1; i <= king.column + 1; i++) {
             for (int j = king.row - 1; j <= king.row + 1; j++) {
                 if (i == king.column && j == king.row) {
                     continue;
@@ -192,8 +192,9 @@ public class Board extends JPanel {
             }
 
 
-        }*/
-        if(isValidMove(new Move(this, king, king.column-1, king.row-1)) ||
+        }
+
+        /*if(isValidMove(new Move(this, king, king.column-1, king.row-1)) ||
                 isValidMove(new Move(this, king, king.column-1, king.row+1)) ||
                 isValidMove(new Move(this, king, king.column-1, king.row)) ||
                 isValidMove(new Move(this, king, king.column+1, king.row-1)) ||
@@ -201,8 +202,9 @@ public class Board extends JPanel {
                 isValidMove(new Move(this, king, king.column+1, king.row)) ||
                 isValidMove(new Move(this, king, king.column, king.row-1))||
                 isValidMove(new Move(this, king, king.column, king.row+1))){
+            hasValidMoves = true;
+        }*/
 
-        }
 
         System.out.println(attacked);
         System.out.println(ptotected_piece);
