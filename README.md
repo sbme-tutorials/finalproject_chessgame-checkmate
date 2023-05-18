@@ -25,7 +25,7 @@ The game includes several customizable parameters that can be adjusted in the `C
 
 - `frameSize`: the size of the game board in pixels
 - `player1Name` and `player2Name`: the names of the two players
-- `playTime`: the amount of time each player has to make their moves
+- `Theme`: we have two aesome themes (Dark - Green)
 
 Additional customization options can be added by modifying the source code.
 
